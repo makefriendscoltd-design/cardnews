@@ -1,0 +1,94 @@
+{
+  "handle": "@aimax",
+  "preset": "cine",
+  "accent": null,
+  "slides": [
+    {
+      "type": "cover",
+      "f": {
+        "badge": "Claude Code",
+        "title": "SaaS를 넘어선\n*나만의 CRM*",
+        "sub": "구독료 대신 코드로\n비즈니스 엔진을 직접 만든다"
+      }
+    },
+    {
+      "type": "content",
+      "f": {
+        "idx": "",
+        "total": "04",
+        "tag": "왜 지금인가",
+        "num": "",
+        "head": "매달 수백 달러,\n그런데 *내 맘대론* 안 된다",
+        "desc": "HubSpot·GoHighLevel 같은 기성 CRM은 **니치한 요구사항**을 담기 어렵고 데이터 통합도 복잡합니다. Claude Code는 IDE 안에서 직접 아키텍처를 설계하고 배포하는 **에이전트적 개발**로 이 갈증을 풉니다."
+      }
+    },
+    {
+      "type": "content",
+      "f": {
+        "idx": "01",
+        "total": "04",
+        "tag": "Architecture",
+        "num": "01",
+        "head": "자연어 한 줄이\n*풀스택 앱*으로",
+        "desc": "VS Code 같은 데스크톱 환경에서 실행되는 Claude Code. **5단계 리드 파이프라인**, 연락처 DB, 기업 프로필, 분석 탭까지 명령하면 프론트와 백엔드를 일관되게 설계하고, 과정을 실시간으로 조율할 수 있습니다."
+      }
+    },
+    {
+      "type": "content",
+      "f": {
+        "idx": "02",
+        "total": "04",
+        "tag": "Deploy",
+        "num": "02",
+        "head": "Railway로\n*24시간* 살아있는 서버",
+        "desc": "Claude Code와 궁합 좋은 클라우드 **Railway**는 프로젝트 생성부터 배포까지 자동화합니다. CI/CD 설정 없이 명령 한 번에 라이브 링크가 뜨고, 브라우저를 닫아도 백그라운드 자동화가 계속 돌아갑니다."
+      }
+    },
+    {
+      "type": "content",
+      "f": {
+        "idx": "03",
+        "total": "04",
+        "tag": "Integration",
+        "num": "03",
+        "head": "MCP·API로\n*무한 확장*",
+        "desc": "리드가 들어오면 AI가 기업 정보를 분석하는 **Enrichment·스코어링**을 구현하고, 이메일 자동 발송은 **Resend** API로 처리합니다. Claude Code가 기술 문서를 스스로 읽고 연동 코드를 작성합니다."
+      }
+    },
+    {
+      "type": "content",
+      "f": {
+        "idx": "04",
+        "total": "04",
+        "tag": "Automation",
+        "num": "04",
+        "head": "서버가 스스로\n*판단하고 움직인다*",
+        "desc": "가장 고도화된 단계는 사람 개입 없는 **백그라운드 자동화**입니다. 새 리드 추가 60초 후 자동으로 '연락 완료'로 전환하거나, Fathom 미팅 노트를 감지해 리드를 업데이트하는 로직까지 확장됩니다."
+      }
+    },
+    {
+      "type": "table",
+      "f": {
+        "title": "기성 SaaS vs *커스텀 AI CRM*",
+        "rows": "개발 유연성 | 기능 내 제한적 확장 | **소스코드 수준 무한 커스텀**\n배포·운영 | 구독 종속 모델 | Railway 독립 서버\n외부 연동 | Zapier 등 유료 도구 | **MCP·API 직접 연동**\n자동화 | 정해진 트리거 | 서버 사이드 백그라운드 로직"
+      }
+    },
+    {
+      "type": "quote",
+      "f": {
+        "quote": "이젠 코딩 실력이 아니라\n*비즈니스 설계력*의 문제",
+        "by": "데이터 소유권을 통제하고 민첩성을 극대화하는 엔진"
+      }
+    },
+    {
+      "type": "closing",
+      "f": {
+        "head": "AI 커뮤니티에\n*함께해요*",
+        "desc": "참여하고 싶다면 댓글에\n**“AIMAX”**를 남겨주세요.",
+        "cta1": "💬 댓글 AIMAX",
+        "cta2": "＋ 팔로우",
+        "hint": "커뮤니티 초대장 보내드려요"
+      }
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  :root{ --blue:#2563EB; --paper:#FFFFFF; --hl:#D9E5FF; --ink:#0F1B33; --mut:#6B7A99; --line:#E6ECF7 }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:'Pretendard',sans-serif;background:var(--paper);color:var(--ink);
+    width:1080px;height:1350px;padding:108px 92px;
+    display:flex;flex-direction:column;justify-content:center;gap:52px;
+  }
+  .label{align-self:flex-start;display:inline-flex;align-items:center;gap:12px;
+    background:var(--hl);color:var(--blue);font-size:28px;font-weight:700;
+    padding:14px 28px;border-radius:999px;letter-spacing:.02em}
+  .head{font-size:96px;font-weight:800;line-height:1.16;letter-spacing:-0.03em}
+  .head .mark{background:linear-gradient(transparent 56%,var(--hl) 0);padding:0 6px;color:var(--blue)}
+  .desc{font-size:42px;font-weight:500;line-height:1.6;color:#384154;max-width:880px}
+  .desc b{color:var(--ink);font-weight:700;
+    background:linear-gradient(transparent 60%,var(--hl) 0)}
+  .foot{display:flex;justify-content:space-between;align-items:center;
+    margin-top:8px;border-top:2px solid var(--line);padding-top:34px}
+  .brand{font-size:28px;font-weight:700;color:var(--mut)}
+  .swipe{font-size:30px;font-weight:800;color:var(--blue);letter-spacing:.1em}
+</style>
+</head>
+<body>
+  <span class="label">왜 지금인가</span>
+  <h2 class="head">수천 개 제품을<br>혼자 디자인? <span class="mark">불가능</span>했죠.</h2>
+  <p class="desc">디자인 기술과 아이디어 고갈이 가장 큰 장벽이었습니다. 이제 클로드는 챗봇을 넘어, 당신을 위해 <b>디자인 도구를 직접 코딩하는 ‘시스템 구축자’</b>가 됩니다.</p>
+  <div class="foot">
+    <span class="brand">@aimax</span>
+    <span class="swipe">&gt;&gt;&gt;&gt;</span>
+  </div>
+</body>
+</html>

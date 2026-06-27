@@ -1,0 +1,14 @@
+# 시크릿 (실제 API 키는 커밋 금지)
+tools/pexels-key.txt
+
+# 임시 / 생성물
+editor/_deck.js
+editor/_seed.html
+output/
+inbox/done/
+
+# 환경
+node_modules/
+*.log
+.DS_Store
+Thumbs.db

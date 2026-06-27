@@ -1,0 +1,58 @@
+<!-- @dsCard group="카드뉴스" name="마무리(CTA) 카드" -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  :root{ --bg:#0A0A0C; --paper:#F5F4F0; --accent:#8B5CF6; --accent2:#C4B5FD; --mut:#8A8A93 }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:'Pretendard',sans-serif;
+    background:var(--bg); color:var(--paper);
+    width:1080px;height:1350px;padding:110px 92px;
+    display:flex;flex-direction:column;justify-content:space-between;
+    position:relative;overflow:hidden;
+  }
+  .leak{position:absolute;width:620px;height:620px;border-radius:50%;filter:blur(10px);
+    background:radial-gradient(circle,rgba(139,92,246,.5),transparent 68%);
+    bottom:-200px;left:-140px;pointer-events:none}
+  .topline{position:absolute;top:0;left:0;right:0;height:5px;
+    background:linear-gradient(90deg,transparent,var(--accent2),transparent);opacity:.8}
+  .center{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;
+    justify-content:center;gap:48px}
+  .head{font-size:104px;font-weight:800;line-height:1.1;letter-spacing:-0.035em}
+  .head em{font-style:normal;
+    background:linear-gradient(180deg,var(--accent2),var(--accent));
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .desc{font-size:38px;font-weight:500;color:#BFBFC7;line-height:1.55;max-width:800px}
+  .cta{display:flex;gap:26px;flex-wrap:wrap}
+  .pill{display:inline-flex;align-items:center;gap:14px;
+    font-size:34px;font-weight:700;padding:24px 44px;border-radius:999px}
+  .pill.save{background:linear-gradient(135deg,var(--accent2),var(--accent));color:#fff}
+  .pill.follow{background:transparent;color:var(--paper);border:2px solid #2E2E36}
+  .foot{position:relative;z-index:2;display:flex;justify-content:space-between;
+    align-items:center;border-top:2px solid #23232A;padding-top:36px}
+  .brand{font-size:36px;font-weight:800}
+  .hint{font-size:28px;color:var(--mut);font-weight:500}
+</style>
+</head>
+<body>
+  <div class="topline"></div>
+  <div class="leak"></div>
+
+  <div class="center">
+    <h2 class="head">도움이 됐다면<br><em>저장 &amp; 팔로우</em></h2>
+    <p class="desc">매주 AI 트렌드를 카드 한 장으로<br>쉽게 정리해 드립니다.</p>
+    <div class="cta">
+      <span class="pill save">🔖 저장하기</span>
+      <span class="pill follow">＋ 팔로우</span>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span class="brand">@your_handle</span>
+    <span class="hint">공유해서 같이 보기 &gt;</span>
+  </div>
+</body>
+</html>

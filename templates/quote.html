@@ -1,0 +1,40 @@
+<!-- @dsCard group="카드뉴스" name="인용구 카드" -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  :root{ --bg:#0A0A0C; --paper:#F5F4F0; --accent:#8B5CF6; --accent2:#C4B5FD; --mut:#8A8A93 }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:'Pretendard',sans-serif;
+    background:var(--bg); color:var(--paper);
+    width:1080px;height:1350px;padding:120px 100px;
+    display:flex;flex-direction:column;justify-content:center;gap:52px;
+    position:relative;overflow:hidden;
+  }
+  .leak{position:absolute;width:640px;height:640px;border-radius:50%;filter:blur(10px);
+    background:radial-gradient(circle,rgba(139,92,246,.42),transparent 68%);
+    top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+  .mark{position:relative;z-index:2;font-family:Georgia,serif;
+    font-size:260px;font-weight:700;line-height:.6;height:130px;color:var(--accent2);opacity:.9}
+  .quote{position:relative;z-index:2;font-size:80px;font-weight:800;
+    line-height:1.32;letter-spacing:-0.03em}
+  .quote .hl{background:linear-gradient(180deg,var(--accent2),var(--accent));
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .by{position:relative;z-index:2;display:flex;align-items:center;gap:22px;
+    font-size:34px;font-weight:600;color:var(--accent2)}
+  .by::before{content:"";width:64px;height:3px;background:var(--accent2);border-radius:2px}
+  .brand{position:absolute;bottom:96px;left:100px;z-index:2;
+    font-size:28px;font-weight:700;color:var(--mut)}
+</style>
+</head>
+<body>
+  <div class="leak"></div>
+  <div class="mark">&ldquo;</div>
+  <p class="quote">결국 <span class="hl">AI를 잘 쓰는 사람</span>이<br>가장 빠르게 성장합니다.</p>
+  <div class="by">핵심 한 줄 요약</div>
+  <span class="brand">@your_handle</span>
+</body>
+</html>

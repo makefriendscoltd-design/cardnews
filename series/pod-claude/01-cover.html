@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  :root{ --blue:#2563EB; --paper:#FFFFFF; --ice:#BBD0FF; --mut:#C3D2F5 }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1080px;height:1350px}
+  body{
+    font-family:'Pretendard',sans-serif;color:var(--paper);
+    width:1080px;height:1350px;padding:112px 92px;
+    display:flex;flex-direction:column;justify-content:space-between;
+    background:
+      radial-gradient(1100px 620px at 82% -8%, #3B82F6, transparent 60%),
+      linear-gradient(158deg,#2563EB 0%,#1D4ED8 46%,#0E2A6E 100%);
+    position:relative;overflow:hidden;
+  }
+  .topline{position:absolute;top:0;left:0;right:0;height:5px;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.7),transparent)}
+  .badge{display:inline-flex;align-items:center;gap:14px;
+    border:2px solid rgba(255,255,255,.5);border-radius:999px;
+    padding:14px 30px;font-size:27px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+  .badge::before{content:"";width:12px;height:12px;border-radius:50%;
+    background:#fff;box-shadow:0 0 16px #fff}
+  .title{margin-top:46px;font-size:110px;font-weight:800;line-height:1.1;letter-spacing:-0.04em}
+  .title em{font-style:normal;color:var(--ice)}
+  .sub{font-size:36px;font-weight:500;line-height:1.55;color:#DCE6FF;max-width:840px}
+  .foot{display:flex;justify-content:space-between;align-items:flex-end}
+  .brand{font-size:32px;font-weight:700}
+  .swipe{font-size:34px;font-weight:800;color:var(--ice);letter-spacing:.1em}
+</style>
+</head>
+<body>
+  <div class="topline"></div>
+  <div>
+    <span class="badge">POD Business</span>
+    <h1 class="title">디자인 기술 0으로<br><em>POD 자동수익</em><br>만드는 5단계</h1>
+  </div>
+  <p class="sub">클로드 디자인으로 디자인부터 판매까지<br>‘시스템’으로 자동화하는 법.</p>
+  <div class="foot">
+    <span class="brand">@aimax</span>
+    <span class="swipe">&gt;&gt;&gt;&gt;</span>
+  </div>
+</body>
+</html>

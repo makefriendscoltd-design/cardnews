@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  :root{ --paper:#FFFFFF; --ice:#BBD0FF; --blue:#3B82F6; --mut:#9DB0D6 }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Pretendard',sans-serif;color:var(--paper);
+    width:1080px;height:1350px;padding:104px 84px;
+    background:linear-gradient(158deg,#13357E 0%,#0E2A6E 55%,#0A1F52 100%);
+    display:flex;flex-direction:column;justify-content:center;gap:56px;position:relative;overflow:hidden}
+  .glow{position:absolute;width:680px;height:680px;border-radius:50%;filter:blur(12px);
+    background:radial-gradient(circle,rgba(59,130,246,.4),transparent 68%);top:-180px;right:-180px}
+  .htxt{position:relative;z-index:2;font-size:72px;font-weight:800;letter-spacing:-0.03em;line-height:1.1}
+  .htxt em{font-style:normal;color:var(--ice)}
+  .tbl{position:relative;z-index:2;display:flex;flex-direction:column;gap:0;
+    border:1px solid rgba(255,255,255,.14);border-radius:28px;overflow:hidden}
+  .hr{display:grid;grid-template-columns:1fr 1.05fr 1.15fr;align-items:center}
+  .hr+.hr{border-top:1px solid rgba(255,255,255,.12)}
+  .hr>div{padding:34px 30px;font-size:32px;line-height:1.34}
+  .hrhead>div{font-size:27px;font-weight:700;letter-spacing:.06em;color:var(--mut);
+    background:rgba(255,255,255,.05);text-transform:uppercase}
+  .cat{font-weight:700;color:#DDE7FF}
+  .old{color:#A9B6D6}
+  .ai{color:#fff;font-weight:600;background:rgba(59,130,246,.16)}
+  .ai b{color:var(--ice)}
+  .brand{position:relative;z-index:2;font-size:26px;font-weight:600;color:var(--mut);text-align:right}
+</style>
+</head>
+<body>
+  <div class="glow"></div>
+  <h2 class="htxt">전통 방식 vs <em>클로드 AI</em></h2>
+  <div class="tbl">
+    <div class="hr hrhead"><div>항목</div><div>전통적인 방식</div><div>클로드 AI 시스템</div></div>
+    <div class="hr"><div class="cat">디자인 제작</div><div class="old">건당 15~20분 수작업</div><div class="ai"><b>초 단위</b> 대량 생성</div></div>
+    <div class="hr"><div class="cat">쇼핑몰 구축</div><div class="old">개발자 고용·복잡 설정</div><div class="ai">AI 빌더로 <b>1분 완성</b></div></div>
+    <div class="hr"><div class="cat">운영 방식</div><div class="old">노동 집약 수작업</div><div class="ai">시스템 기반 <b>반자동화</b></div></div>
+    <div class="hr"><div class="cat">확장성</div><div class="old">인력 추가 필요</div><div class="ai">리스팅 <b>무한 확장</b></div></div>
+  </div>
+  <div class="brand">@aimax</div>
+</body>
+</html>
