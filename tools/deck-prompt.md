@@ -23,6 +23,7 @@
   "handle": "@aimax",
   "preset": "cine",
   "accent": null,
+  "bg": "cinematic dark office at night, glowing monitors, moody blue light",
   "slides": [
     {"type":"cover","f":{"badge":"짧은 영문/한글 라벨","title":"제목\n둘째줄","sub":"서브카피\n둘째줄"}},
     {"type":"content","f":{"idx":"","total":"05","tag":"왜 지금인가","num":"","head":"문제제기\n헤드라인","desc":"본문 1~2문장 **굵게** 포함"}},
@@ -35,6 +36,7 @@
 
 ## 고정값
 - `handle`은 항상 `"@aimax"`, `preset`은 항상 `"cine"`, `accent`는 `null`.
+- `bg`는 이 글의 주제를 상징하는 **배경 사진 장면 묘사(영어 한 문장)**. 글자·로고·사람 얼굴 클로즈업 없는 분위기 사진 장면으로. (배경 이미지 AI 생성에 쓰임)
 - `closing` 카드는 위 CTA(AIMAX 커뮤니티 메시지)를 항상 그대로 사용한다.
 - `table`의 첫 줄은 헤더가 아니라 첫 데이터 행이다(헤더 "항목/전통/AI"는 자동 추가됨). 각 행은 `왼쪽 | 가운데 | 오른쪽`.
 

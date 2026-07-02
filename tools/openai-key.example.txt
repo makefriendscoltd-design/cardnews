@@ -1,0 +1,1 @@
+여기에 OpenAI API 키를 붙여넣으세요 (이 줄을 지우고) — 발급: https://platform.openai.com/api-keys

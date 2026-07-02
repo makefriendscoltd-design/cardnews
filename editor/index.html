@@ -198,6 +198,7 @@
       <h2>배경 이미지</h2>
       <div class="bgbox">
         <div class="row2" style="margin-top:0"><button class="btn" id="shufBg" style="flex:2;background:#0ea5a0">🎲 배경 바꾸기</button><button class="btn ghost" id="shufAll" style="flex:1">전체</button></div>
+        <div class="row2"><input id="genPrompt" placeholder="AI 배경 프롬프트 (비우면 자동)" style="flex:1;background:#1b1e26;border:1px solid #2c2f3a;color:#e8e9ee;border-radius:8px;padding:8px;font-size:12px;font-family:inherit"><button class="btn" id="genBg" style="background:#7c3aed">🎨 생성</button></div>
         <div class="row2"><button class="btn ghost" id="searchBg" style="flex:1">🔍 무료 이미지 검색</button></div>
         <select id="bgSel" style="margin-top:8px"></select>
         <div class="row2"><input type="file" id="bgUpload" accept="image/*" style="font-size:11px;padding:6px"></div>
@@ -212,13 +213,13 @@
 
   <div class="modal" id="imgModal">
     <div class="box">
-      <h3>🔍 무료 이미지 검색 (Pexels)</h3>
+      <h3>🔍 무료 이미지 검색</h3>
       <div class="actions" style="justify-content:flex-start">
         <input id="imgQ" class="qin" placeholder="검색어 (예: ocean, dark office, city night, gradient)">
         <button class="btn" id="imgSearch">검색</button>
         <button class="btn ghost" id="imgClose">닫기</button>
       </div>
-      <div class="sub" id="imgMsg" style="min-height:16px">검색어 입력 → 클릭하면 현재 카드 배경으로 적용. (AI 서버 + Pexels 키 필요)</div>
+      <div class="sub" id="imgMsg" style="min-height:16px">검색어 입력 → 클릭하면 현재 카드 배경으로 적용. (AI 서버(start.bat)만 켜져 있으면 키 없이 동작)</div>
       <div class="grid" id="imgGrid"></div>
     </div>
   </div>
@@ -362,6 +363,49 @@ bgSel.onchange=()=>{const s=state.slides[sel];s.f.bgByStyle=s.f.bgByStyle||{};s.
 function pickBg(cur){ const pool=POOLS[state.preset]; if(!pool||!pool.length) return null; let p=cur,t=0; while(p===cur && t<25){ p=pool[Math.floor(Math.random()*pool.length)]; t++; } return p; }
 document.getElementById('shufBg').onclick=()=>{ if(!POOLS[state.preset]){ alert('이 스타일은 배경 이미지를 안 써요.\n(시네마틱·매거진·만화에서만 가능)'); return; } const s=state.slides[sel]; const p=pickBg(effBg(s)); if(!p)return; s.f.bgByStyle=s.f.bgByStyle||{}; s.f.bgByStyle[state.preset]=p; save(); renderAll(); };
 document.getElementById('shufAll').onclick=()=>{ if(!POOLS[state.preset]){ alert('이 스타일은 배경 이미지를 안 써요.'); return; } state.slides.forEach(s=>{ if(['cover','quote','closing','table'].includes(s.type)){ const p=pickBg(''); s.f.bgByStyle=s.f.bgByStyle||{}; s.f.bgByStyle[state.preset]=p; } }); save(); renderAll(); };
+/* ===== 서버 기능 감지 + AI 배경 생성 ===== */
+let CAPS={pexels:false,codex:false,gemini:false,openai:false};
+const canGen=()=>CAPS.codex||CAPS.gemini||CAPS.openai;
+(async()=>{ try{ const r=await fetch('http://'+serverBase()+'/ping'); const j=await r.json(); if(j&&j.ok) CAPS=j; }catch(e){} })();
+const toast=(()=>{ const d=document.createElement('div'); d.style.cssText='position:fixed;right:16px;bottom:16px;background:#1f2937;color:#e8e9ee;border:1px solid #374151;border-radius:10px;padding:10px 16px;font-size:13px;z-index:200;display:none;box-shadow:0 8px 24px rgba(0,0,0,.4)'; document.body.appendChild(d); let t; return (msg,ms)=>{ if(!msg){d.style.display='none';return;} d.textContent=msg; d.style.display='block'; clearTimeout(t); if(ms) t=setTimeout(()=>d.style.display='none',ms); }; })();
+const GENSTYLE={cine:'cinematic moody photograph, deep shadows, teal-blue color grade, dark tones for overlaid white text',mag:'bold editorial magazine photograph, high contrast, dark tones for overlaid white text',manga:'dramatic manga style illustration, dynamic composition, bold ink lines, dark tones for overlaid white text',pixel:'dark minimal tech background, subtle orange neon glow',doodle:'soft pastel hand-drawn doodle pattern background, cream paper texture',blue:'clean abstract blue gradient background, soft light'};
+function buildGenPrompt(slide,extra){
+  const fallback=clean((slide.f.head||slide.f.title||slide.f.quote||'')).replace(/\n/g,' ');
+  const theme=(state.bg||'').trim()||fallback||'abstract technology concept';
+  return theme+(extra?', '+extra:'')+'. Style: '+(GENSTYLE[state.preset]||GENSTYLE.cine)+'. Vertical 4:5 background image for a social media card. No text, no letters, no logos, no watermark.';
+}
+async function genImage(prompt){
+  const r=await fetch('http://'+serverBase()+'/img-gen',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt})});
+  let j=null; try{ j=await r.json(); }catch(e){}
+  if(!r.ok||!j||j.error||!j.url) throw new Error((j&&j.error)||('서버 오류 '+r.status));
+  return j.url;
+}
+const genBtn=document.getElementById('genBg'),genPromptEl=document.getElementById('genPrompt');
+genBtn.onclick=async()=>{
+  if(!canGen()){ alert('AI 이미지 생성 수단이 없어요.\n\n① ChatGPT 구독이 있으면 (추천, 키 불필요):\n   호스트 PC에서 npm i -g @openai/codex → codex login\n② 또는 aistudio.google.com/apikey 무료 키 → tools/gemini-key.txt\n\n(서버 재시작 필요 없음)'); return; }
+  const s=state.slides[sel]; const p=genPromptEl.value.trim()||buildGenPrompt(s);
+  genBtn.disabled=true; genBtn.textContent='생성 중…';
+  try{ const url=await genImage(p); s.f.bgByStyle=s.f.bgByStyle||{}; s.f.bgByStyle[state.preset]=url; save(); renderAll(); }
+  catch(err){ alert('배경 생성 실패: '+err.message); }
+  finally{ genBtn.disabled=false; genBtn.textContent='🎨 생성'; }
+};
+/* AI 변환 직후: 풀에서 셔플(즉시) → 키 있으면 주제 맞춤 배경을 AI로 생성해 교체 */
+const PHOTO_STYLES=['cine','mag','manga'];
+function shuffleDeckBgs(){ if(!POOLS[state.preset]) return; state.slides.forEach(s=>{ if(['cover','quote','closing','table'].includes(s.type)){ s.f.bgByStyle=s.f.bgByStyle||{}; s.f.bgByStyle[state.preset]=pickBg(''); } }); save(); }
+async function autoBgs(){
+  if(!PHOTO_STYLES.includes(state.preset)) return;
+  shuffleDeckBgs(); renderAll();
+  if(!canGen()) return;
+  const targets=state.slides.filter(s=>['cover','quote','closing'].includes(s.type));
+  const extras={cover:'wide establishing shot',quote:'close-up detail, shallow depth of field',closing:'warm hopeful light'};
+  let done=0;
+  for(const s of targets){
+    toast('🎨 주제 맞춤 배경 생성 중… ('+(done+1)+'/'+targets.length+')');
+    try{ const url=await genImage(buildGenPrompt(s,extras[s.type]||'')); s.f.bgByStyle=s.f.bgByStyle||{}; s.f.bgByStyle[state.preset]=url; save(); renderAll(); done++; }
+    catch(err){ toast('배경 생성 실패: '+err.message,5000); return; }
+  }
+  toast('🎨 배경 '+done+'장 생성 완료',3000);
+}
 // Pexels 무료 이미지 검색
 const imgModal=document.getElementById('imgModal'),imgGrid=document.getElementById('imgGrid'),imgQ=document.getElementById('imgQ'),imgMsg=document.getElementById('imgMsg');
 document.getElementById('searchBg').onclick=()=>{ imgModal.classList.add('on'); setTimeout(()=>imgQ.focus(),50); };
@@ -372,9 +416,9 @@ async function doImgSearch(){
   try{
     const r=await fetch('http://'+serverBase()+'/img-search?q='+encodeURIComponent(q));
     if(!r.ok){ let m='검색 실패'; try{ m=(await r.json()).error||m; }catch(_){} throw new Error(m); }
-    const {photos}=await r.json();
-    if(!photos||!photos.length){ imgMsg.textContent='결과 없음 — 다른 검색어로'; return; }
-    imgMsg.textContent=photos.length+'장 — 클릭하면 이 카드 배경으로 적용';
+    const {photos,source}=await r.json();
+    if(!photos||!photos.length){ imgMsg.textContent='결과 없음 — 다른 검색어로 (영어 검색어가 결과가 더 많아요)'; return; }
+    imgMsg.textContent=photos.length+'장 ('+(source||'')+') — 클릭하면 이 카드 배경으로 적용';
     photos.forEach(p=>{ const im=document.createElement('img'); im.src=p.thumb; im.loading='lazy'; im.title='Photo by '+p.by+' (Pexels)';
       im.onclick=()=>{ const s=state.slides[sel]; s.f.bgByStyle=s.f.bgByStyle||{}; s.f.bgByStyle[state.preset]='http://'+serverBase()+'/img?url='+encodeURIComponent(p.full); save(); renderAll(); imgModal.classList.remove('on'); };
       imgGrid.appendChild(im); });
@@ -461,7 +505,7 @@ pasteModal.onclick=e=>{ if(e.target===pasteModal) pasteModal.classList.remove('o
 document.getElementById('pasteGo').onclick=()=>{
   const txt=document.getElementById('pasteText').value.trim(); if(!txt){ pasteModal.classList.remove('on'); return; }
   const sl=parseArticle(txt); if(sl.length<2){ alert('내용을 인식하지 못했어요. 제목/소제목 형식을 확인해주세요.'); return; }
-  state.slides=sl; sel=0; save(); renderAll(); pasteModal.classList.remove('on');
+  state.slides=sl; state.bg=''; sel=0; shuffleDeckBgs(); save(); renderAll(); pasteModal.classList.remove('on');
 };
 document.getElementById('pasteAI').onclick=async(e)=>{
   const txt=document.getElementById('pasteText').value.trim(); if(!txt) return;
@@ -472,6 +516,7 @@ document.getElementById('pasteAI').onclick=async(e)=>{
     const deck=await r.json();
     if(!deck||!Array.isArray(deck.slides)||!deck.slides.length) throw new Error('변환 결과가 비었어요');
     state=deck; if(!PRESETS[state.preset]) state.preset='cine'; sel=0; presetSel.value=state.preset; handleEl.value=state.handle||'@aimax'; save(); renderAll(); pasteModal.classList.remove('on');
+    autoBgs();
   }catch(err){
     alert('AI 변환 실패: '+err.message+'\n\n▶ AI 서버가 켜져 있나요?\n  cardnews 폴더의 start.bat 을 더블클릭해서 켜두세요.');
   }finally{ btn.textContent=old; btn.disabled=false; }

@@ -23,8 +23,14 @@
 ## 사무실 공유
 호스트 한 명만 `start.bat` 실행 → 팀원은 브라우저에서 **`http://<호스트IP>:8787/`** 열면 끝. (폴더 복사·설치 불필요, 서버 주소 자동 인식)
 
-## Pexels 이미지 검색 (선택)
-`tools/pexels-key.txt`를 만들어 [Pexels API 키](https://www.pexels.com/api/)(무료)를 넣고 서버 재시작. (예시: `tools/pexels-key.example.txt`)
+## 배경 이미지 3가지 방법
+1. **🎨 AI 배경 생성** — 글 주제에 맞는 배경을 즉석 생성. **✨ AI로 변환** 직후엔 표지·인용·마무리 배경을 자동으로 생성해줍니다. 우선순위:
+   - **ChatGPT 구독 (추천, API 키 불필요)**: 호스트 PC에서 `npm i -g @openai/codex` → `codex login` (ChatGPT 계정 로그인). 서버가 자동 감지해서 **gpt-image-2**로 생성 — 구독 사용량에 포함, 별도 과금 없음.
+   - **Gemini API 키**: [aistudio.google.com/apikey](https://aistudio.google.com/apikey) 무료 키 → `tools/gemini-key.txt`. 기본 모델 **나노바나나 2**(`gemini-3.1-flash-image-preview`), 계정에서 안 되면 `gemini-2.5-flash-image`(무료 티어)로 자동 폴백.
+   - **OpenAI API 키**: `tools/openai-key.txt` (기본 `gpt-image-2`, API 과금)
+   - 키 파일 2번째 줄에 모델명을 쓰면 교체 가능. 키 저장 후 서버 재시작 불필요. (Gemini 구독(Google AI Pro)은 아직 OAuth로 외부 이미지 생성을 지원하지 않아 API 키만 가능)
+2. **🔍 무료 이미지 검색** — 키 없이도 동작(Openverse). `tools/pexels-key.txt`에 [Pexels API 키](https://www.pexels.com/api/)(무료)를 넣으면 Pexels로 업그레이드.
+3. **직접 업로드 / 🎲 기본 풀 셔플**
 
 ## 구조
 - `editor/` — 에디터(단일 HTML) + `assets/`(배경 이미지 풀) + `decks/`(샘플 덱 JSON)
